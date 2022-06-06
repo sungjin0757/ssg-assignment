@@ -1,5 +1,6 @@
 package com.ssgassignment.productinfoapi.domain;
 
+import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class Item extends AbstractDataTraceEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "item_id")
     private Long itemId;
 
     @Column(nullable = false)
@@ -22,19 +24,27 @@ public class Item extends AbstractDataTraceEntity{
     private LocalDateTime itemDisplayStartDate;
     @Column(nullable = false)
     private LocalDateTime itemDisplayEndDate;
+    @Column(name = "item_type", nullable = false)
+    private UserType itemType;
 
-    private Item(String itemName, int itemPrice, LocalDateTime itemDisplayStartDate,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id")
+    private Promotion promotion;
+
+    private Item(String itemName, int itemPrice, UserType itemType, LocalDateTime itemDisplayStartDate,
                 LocalDateTime itemDisplayEndDate) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
+        this.itemType = itemType;
         this.itemDisplayStartDate = itemDisplayStartDate;
         this.itemDisplayEndDate = itemDisplayEndDate;
     }
 
-    public static Item newInstance(String itemName, int itemPrice, LocalDateTime itemDisplayStartDate,
+    public static Item newInstance(String itemName, int itemPrice, UserType itemType,
+                                   LocalDateTime itemDisplayStartDate,
                                    LocalDateTime itemDisplayEndDate){
-        return new Item(itemName, itemPrice, itemDisplayStartDate, itemDisplayEndDate);
+        return new Item(itemName, itemPrice, itemType, itemDisplayStartDate, itemDisplayEndDate);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.ssgassignment.productinfoapi.repository;
 
 import com.ssgassignment.productinfoapi.domain.Item;
+import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,8 @@ class ItemRepositoryTest {
     @Test
     @DisplayName("생성일자 자동생성")
     void 생성일자_자동생성(){
-        Item item = itemRepository.save(Item.newInstance("name",100, LocalDateTime.MIN,
+        Item item = itemRepository.save(Item.newInstance("name",100, UserType.GENERAL,
+                        LocalDateTime.MIN,
                 LocalDateTime.MAX));
         Assertions.assertAll(()->{
             Assertions.assertNotNull(item.getCreatedDate());
