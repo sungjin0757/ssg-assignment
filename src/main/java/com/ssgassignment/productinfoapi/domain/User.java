@@ -13,6 +13,7 @@ public class User extends AbstractDataTraceEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private Long userId;
 
     @Column(nullable = false, unique = true)
@@ -23,6 +24,7 @@ public class User extends AbstractDataTraceEntity{
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "user_type", nullable = false)
     private UserType userType;
     @Enumerated(EnumType.STRING)
     private UserStat userStat;
