@@ -13,6 +13,7 @@ import java.util.Objects;
 public class Promotion extends AbstractDataTraceEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "promotion_id")
     private Long promotionId;
 
     @Column(nullable = false)
