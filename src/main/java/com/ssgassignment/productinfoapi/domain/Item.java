@@ -24,7 +24,9 @@ public class Item extends AbstractDataTraceEntity{
     private LocalDateTime itemDisplayStartDate;
     @Column(nullable = false)
     private LocalDateTime itemDisplayEndDate;
+
     @Column(name = "item_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserType itemType;
 
     @ManyToOne(fetch = FetchType.LAZY)
