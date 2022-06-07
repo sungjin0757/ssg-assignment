@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Getter
+@Table(name= "users")
 public class User extends AbstractDataTraceEntity{
 
     @Id
@@ -16,7 +17,7 @@ public class User extends AbstractDataTraceEntity{
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
