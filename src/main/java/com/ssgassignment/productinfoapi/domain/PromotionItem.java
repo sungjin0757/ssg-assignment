@@ -21,6 +21,15 @@ public class PromotionItem extends AbstractDataTraceEntity{
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
 
+    private PromotionItem(Item item, Promotion promotion) {
+        this.item = item;
+        this.promotion = promotion;
+    }
+
+    public static PromotionItem newInstance(Item item, Promotion promotion){
+        return new PromotionItem(item, promotion);
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o == this)

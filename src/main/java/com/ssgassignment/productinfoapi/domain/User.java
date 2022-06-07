@@ -42,6 +42,10 @@ public class User extends AbstractDataTraceEntity{
         return new User(email, password, name, userType, UserStat.ENABLED);
     }
 
+    public void userWithDrawl(){
+        this.userStat = UserStat.DISABLED;
+    }
+
     @Override
     public boolean equals(Object o) {
         if(o == this)

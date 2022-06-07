@@ -50,6 +50,11 @@ public class Item extends AbstractDataTraceEntity{
         return new Item(itemName, itemPrice, itemType, itemDisplayStartDate, itemDisplayEndDate);
     }
 
+    public void addPromotionItems(List<Promotion> promotions){
+        for (Promotion promotion : promotions) {
+            promotionItems.add(PromotionItem.newInstance(this, promotion));
+        }
+    }
     @Override
     public boolean equals(Object o) {
         if(o == this)
