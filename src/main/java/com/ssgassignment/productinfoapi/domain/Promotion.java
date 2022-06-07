@@ -27,9 +27,6 @@ public class Promotion extends AbstractDataTraceEntity{
     @Column(nullable = false)
     private LocalDateTime promotionEndDate;
 
-    @OneToMany(mappedBy = "promotion")
-    List<Item> items = new ArrayList<>();
-
     private Promotion(String promotionName, int discountAccount, double discountRate,
                      LocalDateTime promotionStartDate, LocalDateTime promotionEndDate) {
         this.promotionName = promotionName;

@@ -5,6 +5,8 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -29,9 +31,8 @@ public class Item extends AbstractDataTraceEntity{
     @Enumerated(EnumType.STRING)
     private UserType itemType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "promotion_id")
-    private Promotion promotion;
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<PromotionItem> promotionItems = new ArrayList<>();
 
     private Item(String itemName, int itemPrice, UserType itemType, LocalDateTime itemDisplayStartDate,
                 LocalDateTime itemDisplayEndDate) {
