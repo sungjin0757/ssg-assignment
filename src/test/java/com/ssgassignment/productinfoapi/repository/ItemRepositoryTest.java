@@ -12,11 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @Transactional
@@ -73,6 +69,36 @@ class ItemRepositoryTest {
            for (Item item : ordableItems2) {
                Assertions.assertNotEquals(item, saveItem1);
            }
+        });
+    }
+
+    @Test
+    @DisplayName("findEnableItems 테스트")
+    void find_Enable_Items_테스트(){
+        Item saveItem1 = itemRepository.save(item1);
+        Item saveItem2 = itemRepository.save(item2);
+        Item saveItem3 = itemRepository.save(item3);
+
+        List<Item> enableItems1 = itemRepository.findPromotionableItems(
+                LocalDateTime.of(2021, 6, 2, 0, 0),
+                LocalDateTime.of(2022, 12, 2, 0, 0));
+        List<Item> enableItems2 = itemRepository.findPromotionableItems(
+                LocalDateTime.of(2022, 6, 2, 0, 0),
+                LocalDateTime.of(2022, 12, 2, 0, 0));
+        List<Item> enableItems3 = itemRepository.findPromotionableItems(
+                LocalDateTime.of(2021, 6, 2, 0, 0),
+                LocalDateTime.of(2022, 6, 2, 0, 0));
+
+        Assertions.assertAll(()->{
+            Assertions.assertEquals(enableItems1.size(),3);
+            Assertions.assertEquals(enableItems2.size(),2);
+            Assertions.assertEquals(enableItems3.size(),2);
+            for (Item item : enableItems2) {
+                Assertions.assertNotEquals(item, item1);
+            }
+            for (Item item : enableItems3) {
+                Assertions.assertNotEquals(item, item3);
+            }
         });
     }
 }
