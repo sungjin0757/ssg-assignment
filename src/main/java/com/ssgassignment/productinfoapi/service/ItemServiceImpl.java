@@ -38,6 +38,7 @@ public class ItemServiceImpl implements ItemService{
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public Long saveItem(ItemDto itemDto) {
         Item item = Item.newInstance(itemDto.getItemName(), itemDto.getItemPrice(), itemDto.getItemType(),
