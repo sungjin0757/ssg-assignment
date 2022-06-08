@@ -5,8 +5,11 @@ import com.ssgassignment.productinfoapi.domain.Promotion;
 import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.ItemDto;
+import com.ssgassignment.productinfoapi.dto.ItemWithPromotionDto;
+import com.ssgassignment.productinfoapi.dto.PromotionItemDto;
 import com.ssgassignment.productinfoapi.dto.UserDto;
 import com.ssgassignment.productinfoapi.exception.DisabledUserException;
+import com.ssgassignment.productinfoapi.exception.NotFoundItemException;
 import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
 import com.ssgassignment.productinfoapi.repository.ItemRepository;
 import com.ssgassignment.productinfoapi.repository.PromotionRepository;
@@ -110,6 +113,42 @@ class ItemServiceTest {
             Assertions.assertEquals(itemRepository.findById(itemId1).get().getPromotionItems().size(),3);
             Assertions.assertEquals(itemRepository.findById(itemId2).get().getPromotionItems().size(),2);
             Assertions.assertEquals(itemRepository.findById(itemId3).get().getPromotionItems().size(),2);
+        });
+    }
+
+    @Test
+    @DisplayName("findItemWithPromotions Test")
+    void findItemWithPromotions_테스트(){
+        promotionRepository.save(promotion1);
+        promotionRepository.save(promotion2);
+        promotionRepository.save(promotion3);
+
+        Long itemId1 = itemService.saveItem(itemDto1);
+        Long itemId2 = itemService.saveItem(itemDto2);
+        Long itemId3 = itemService.saveItem(itemDto3);
+
+        ItemWithPromotionDto findItem1 = itemService.findItemWithPromotions(itemId1);
+        ItemWithPromotionDto findItem2 = itemService.findItemWithPromotions(itemId2);
+        ItemWithPromotionDto findItem3 = itemService.findItemWithPromotions(itemId3);
+
+        for (PromotionItemDto item : findItem1.getPromotionItems()) {
+            System.out.println(item.getPromotionName());
+        }
+        System.out.println();
+        for (PromotionItemDto item : findItem2.getPromotionItems()) {
+            System.out.println(item.getPromotionName());
+        }
+        System.out.println();
+        for (PromotionItemDto item : findItem3.getPromotionItems()) {
+            System.out.println(item.getPromotionName());
+        }
+        Assertions.assertAll(()->{
+            Assertions.assertThrows(NotFoundItemException.class,()->{
+               itemService.findItemWithPromotions(Math.max(itemId1, Math.max(itemId2, itemId3))+1) ;
+            });
+            Assertions.assertEquals(findItem1.getPromotionItems().size(),3);
+            Assertions.assertEquals(findItem2.getPromotionItems().size(),2);
+            Assertions.assertEquals(findItem3.getPromotionItems().size(),2);
         });
     }
 

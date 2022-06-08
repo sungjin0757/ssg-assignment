@@ -5,7 +5,9 @@ import com.ssgassignment.productinfoapi.domain.Promotion;
 import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserStat;
 import com.ssgassignment.productinfoapi.dto.ItemDto;
+import com.ssgassignment.productinfoapi.dto.ItemWithPromotionDto;
 import com.ssgassignment.productinfoapi.exception.DisabledUserException;
+import com.ssgassignment.productinfoapi.exception.NotFoundItemException;
 import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
 import com.ssgassignment.productinfoapi.repository.ItemRepository;
 import com.ssgassignment.productinfoapi.repository.PromotionRepository;
@@ -48,6 +50,15 @@ public class ItemServiceImpl implements ItemService{
         item.addPromotionItems(enablePromotions);
 
         return itemRepository.save(item).getItemId();
+    }
+
+    @Override
+    public ItemWithPromotionDto findItemWithPromotions(Long itemId) {
+        Item item = itemRepository.findById(itemId).orElseThrow(() -> {
+            throw new NotFoundItemException("해당 아이템이 존재하지 않습니다.");
+        });
+
+        return new ItemWithPromotionDto(item);
     }
 
     private void checkDisableUser(User user){
