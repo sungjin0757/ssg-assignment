@@ -1,7 +1,9 @@
 package com.ssgassignment.productinfoapi.domain;
 
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.util.Objects;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends AbstractDataTraceEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

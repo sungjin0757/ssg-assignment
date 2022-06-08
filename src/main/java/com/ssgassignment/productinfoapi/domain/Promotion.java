@@ -1,6 +1,8 @@
 package com.ssgassignment.productinfoapi.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +12,7 @@ import java.util.Objects;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Promotion extends AbstractDataTraceEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

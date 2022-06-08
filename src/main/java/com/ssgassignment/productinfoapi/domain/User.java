@@ -2,7 +2,9 @@ package com.ssgassignment.productinfoapi.domain;
 
 import com.ssgassignment.productinfoapi.domain.enumeration.UserStat;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -10,6 +12,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @Table(name= "users")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends AbstractDataTraceEntity{
 
     @Id

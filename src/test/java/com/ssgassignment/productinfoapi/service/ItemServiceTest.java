@@ -23,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -131,17 +132,6 @@ class ItemServiceTest {
         ItemWithPromotionDto findItem2 = itemService.findItemWithPromotions(itemId2);
         ItemWithPromotionDto findItem3 = itemService.findItemWithPromotions(itemId3);
 
-        for (PromotionItemDto item : findItem1.getPromotionItems()) {
-            System.out.println(item.getPromotionName());
-        }
-        System.out.println();
-        for (PromotionItemDto item : findItem2.getPromotionItems()) {
-            System.out.println(item.getPromotionName());
-        }
-        System.out.println();
-        for (PromotionItemDto item : findItem3.getPromotionItems()) {
-            System.out.println(item.getPromotionName());
-        }
         Assertions.assertAll(()->{
             Assertions.assertThrows(NotFoundItemException.class,()->{
                itemService.findItemWithPromotions(Math.max(itemId1, Math.max(itemId2, itemId3))+1) ;
