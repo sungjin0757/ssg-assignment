@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Data
 public class ItemWithPromotionDto {
+    private Long itemId;
     private String itemName;
     private int itemPrice;
     private UserType itemType;
@@ -19,12 +20,18 @@ public class ItemWithPromotionDto {
     private List<PromotionItemDto> promotionItems;
 
     public ItemWithPromotionDto(Item item){
+        this.itemId = item.getItemId();
         this.itemName = item.getItemName();
         this.itemPrice = item.getItemPrice();
         this.itemType = item.getItemType();
         this.itemDisplayStartDate = item.getItemDisplayStartDate();
         this.itemDisplayEndDate = item.getItemDisplayEndDate();
-        this.promotionItems = item.getPromotionItems().stream().map(i -> new PromotionItemDto(i))
+        LocalDateTime now = LocalDateTime.now();
+        this.promotionItems = item.getPromotionItems().stream().filter(p ->
+                        now.isAfter(p.getPromotion().getPromotionStartDate()) &&
+                                now.isBefore(p.getPromotion().getPromotionEndDate()))
+                .map(pi -> new PromotionItemDto(pi.getPromotion()))
                 .collect(Collectors.toList());
     }
+
 }

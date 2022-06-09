@@ -9,4 +9,5 @@ public interface ItemService {
     List<ItemDto> orderAbleItems(Long userId);
     Long saveItem(ItemDto itemDto);
     ItemWithPromotionDto findItemWithPromotions(Long itemId);
+    void deleteItem(Long itemId);
 }

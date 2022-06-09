@@ -15,8 +15,7 @@ public class PromotionItemDto {
     private LocalDateTime promotionStartDate;
     private LocalDateTime promotionEndDate;
 
-    public PromotionItemDto(PromotionItem promotionItem){
-        Promotion promotion = promotionItem.getPromotion();
+    public PromotionItemDto(Promotion promotion){
         this.promotionName = promotion.getPromotionName();
         this.discountAccount = promotion.getDiscountAccount();
         this.discountRate = promotion.getDiscountRate();

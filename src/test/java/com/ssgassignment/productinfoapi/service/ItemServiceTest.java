@@ -11,6 +11,7 @@ import com.ssgassignment.productinfoapi.dto.UserDto;
 import com.ssgassignment.productinfoapi.exception.DisabledUserException;
 import com.ssgassignment.productinfoapi.exception.NotFoundItemException;
 import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
+import com.ssgassignment.productinfoapi.exception.NotValidTimeException;
 import com.ssgassignment.productinfoapi.repository.ItemRepository;
 import com.ssgassignment.productinfoapi.repository.PromotionRepository;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,6 +53,7 @@ class ItemServiceTest {
     ItemDto itemDto1;
     ItemDto itemDto2;
     ItemDto itemDto3;
+    ItemDto itemDto4;
 
     @BeforeEach
     void setUp(){
@@ -78,6 +81,9 @@ class ItemServiceTest {
         itemDto3 = new ItemDto("name3",100, UserType.GENERAL,
                 LocalDateTime.of(2022, 3, 4,0,0),
                 LocalDateTime.of(2022, 6, 16,0,0));
+        itemDto4 = new ItemDto("name3",100, UserType.GENERAL,
+                LocalDateTime.of(2022, 3, 4,0,0),
+                LocalDateTime.of(2021, 6, 16,0,0));
     }
 
     @Test
@@ -114,6 +120,9 @@ class ItemServiceTest {
             Assertions.assertEquals(itemRepository.findById(itemId1).get().getPromotionItems().size(),3);
             Assertions.assertEquals(itemRepository.findById(itemId2).get().getPromotionItems().size(),2);
             Assertions.assertEquals(itemRepository.findById(itemId3).get().getPromotionItems().size(),2);
+            Assertions.assertThrows(NotValidTimeException.class, ()->{
+                itemService.saveItem(itemDto4);
+            });
         });
     }
 
@@ -129,17 +138,30 @@ class ItemServiceTest {
         Long itemId3 = itemService.saveItem(itemDto3);
 
         ItemWithPromotionDto findItem1 = itemService.findItemWithPromotions(itemId1);
-        ItemWithPromotionDto findItem2 = itemService.findItemWithPromotions(itemId2);
         ItemWithPromotionDto findItem3 = itemService.findItemWithPromotions(itemId3);
 
         Assertions.assertAll(()->{
+            Assertions.assertThrows(NotValidTimeException.class, ()->{
+                itemService.findItemWithPromotions(itemId2);
+            });
             Assertions.assertThrows(NotFoundItemException.class,()->{
                itemService.findItemWithPromotions(Math.max(itemId1, Math.max(itemId2, itemId3))+1) ;
             });
-            Assertions.assertEquals(findItem1.getPromotionItems().size(),3);
-            Assertions.assertEquals(findItem2.getPromotionItems().size(),2);
+            Assertions.assertEquals(findItem1.getPromotionItems().size(),2);
             Assertions.assertEquals(findItem3.getPromotionItems().size(),2);
         });
     }
 
+    @Test
+    @DisplayName("DeleteItem Test")
+    void deleteItem_테스트(){
+        Assertions.assertThrows(NotFoundItemException.class, ()->{
+           itemService.deleteItem(0l);
+        });
+
+        Long itemId = itemService.saveItem(itemDto1);
+        itemService.deleteItem(itemId);
+
+        Assertions.assertEquals(itemRepository.findById(itemId), Optional.empty());
+    }
 }
