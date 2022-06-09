@@ -1,5 +1,6 @@
 package com.ssgassignment.productinfoapi.controller.exception;
 
+import com.ssgassignment.productinfoapi.exception.ParameterException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -27,6 +28,13 @@ public class ParameterErrorResult {
 
     public void addDataErrors(HttpMessageNotReadableException ex){
         errors.put("Data Exception", ex.getMessage());
+    }
+
+    public void addParamErrors(ParameterException ex){
+        ex.getBindingResult().getFieldErrors()
+                .forEach(c -> errors.put(c.getField(), c.getDefaultMessage()));
+        ex.getBindingResult().getGlobalErrors()
+                .forEach(c -> errors.put(c.getCode(), c.getDefaultMessage()));
     }
 
 }

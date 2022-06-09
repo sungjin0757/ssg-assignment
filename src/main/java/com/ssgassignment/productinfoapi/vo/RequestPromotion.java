@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
-public class ResponsePromotion {
-    private Long promotionId;
+public class RequestPromotion {
+    @NotNull(message = "PromotionName Cannot Be Null")
     private String promotionName;
     private Integer discountAccount;
     private Double discountRate;

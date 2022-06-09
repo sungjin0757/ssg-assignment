@@ -20,7 +20,7 @@ public class ResponseItemWithPromotion {
     private LocalDateTime itemDisplayStartDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime itemDisplayEndDate;
-    private ResponsePromotion promotion;
+    private ResponsePromotionWithPrice promotion;
 
     public ResponseItemWithPromotion(ItemWithPromotionDto dto) {
         this.itemId = dto.getItemId();
@@ -29,7 +29,7 @@ public class ResponseItemWithPromotion {
         this.itemDisplayStartDate = dto.getItemDisplayStartDate();
         this.itemDisplayEndDate = dto.getItemDisplayEndDate();
         PromotionItemDto p = updateOptimalPromotion(dto.getPromotionItems(), dto.getItemPrice());
-        this.promotion = p!=null ? new ResponsePromotion(p, dto.getItemPrice(),
+        this.promotion = p!=null ? new ResponsePromotionWithPrice(p, dto.getItemPrice(),
                 afterPromotion(dto.getItemPrice(), p.getDiscountAccount(), p.getDiscountRate())) : null;
 
     }

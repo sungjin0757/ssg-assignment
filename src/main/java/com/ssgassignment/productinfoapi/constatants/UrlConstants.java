@@ -22,5 +22,10 @@ public abstract class UrlConstants {
      */
     public static final String ITEM_BASE = API_PREFIX+"/items";
 
+    /**
+     * promotion uri
+     */
+    public static final String PROMOTION_BASE = API_PREFIX+"/promotions";
+
 
 }
