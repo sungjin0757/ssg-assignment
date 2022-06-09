@@ -4,6 +4,7 @@ import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.UserDto;
 import com.ssgassignment.productinfoapi.exception.DuplicateEmailException;
+import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,6 +57,20 @@ class UserServiceTest {
         Assertions.assertThrows(DuplicateEmailException.class,()->{
            userService.join(userDto1);
            userService.join(userDto1);
+        });
+    }
+
+    @Test
+    @DisplayName("withdrawUser 테스트")
+    void withdrawUser_테스트(){
+        Long userId = userService.join(userDto1);
+        userService.withdrawUser(userId);
+
+        Assertions.assertAll(()->{
+            Assertions.assertEquals(userRepository.findById(userId), Optional.empty());
+            Assertions.assertThrows(NotFoundUserException.class, ()->{
+                userService.withdrawUser(userId);
+            });
         });
     }
 }
