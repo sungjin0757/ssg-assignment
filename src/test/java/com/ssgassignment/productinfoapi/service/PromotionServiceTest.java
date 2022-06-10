@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 
 @SpringBootTest
-@EnableJpaAuditing
 @Transactional
 class PromotionServiceTest {
     @Autowired

@@ -39,7 +39,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@EnableJpaAuditing
 @AutoConfigureMockMvc
 @Transactional
 class ItemApiControllerTest {

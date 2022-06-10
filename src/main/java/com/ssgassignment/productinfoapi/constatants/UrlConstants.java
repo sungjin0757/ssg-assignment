@@ -16,6 +16,7 @@ public abstract class UrlConstants {
      */
     public static final String USER_BASE = API_PREFIX+"/users";
     public static final String USER_WITHDRAW = "/withdraw";
+    public static final String LOGIN = "/login";
 
     /**
      * item uri

@@ -18,6 +18,8 @@ spring:
       hibernate:
         default_batch_fetch_size: 1000
         format_sql: true
-
+jwt:
+  secret: spring-boot-ssg-backend-assginment-security-jwt-secret-key
+  expiration: 30
 
 

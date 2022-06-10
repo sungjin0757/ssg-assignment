@@ -16,7 +16,6 @@ import java.util.List;
 
 @DataJpaTest
 @Transactional
-@EnableJpaAuditing
 class ItemRepositoryTest {
     @Autowired
     ItemRepository itemRepository;

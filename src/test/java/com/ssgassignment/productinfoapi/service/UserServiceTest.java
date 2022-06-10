@@ -4,8 +4,10 @@ import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.UserDto;
 import com.ssgassignment.productinfoapi.exception.DuplicateEmailException;
+import com.ssgassignment.productinfoapi.exception.LoginFailException;
 import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
+import com.ssgassignment.productinfoapi.vo.RequestLogin;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-@EnableJpaAuditing
 class UserServiceTest {
     @Autowired
     UserService userService;
@@ -34,7 +35,7 @@ class UserServiceTest {
     @BeforeEach
     void setUp(){
         userDto1 = new UserDto("name1", "1234", "abc", UserType.GENERAL);
-        userDto2 = new UserDto("name2", "1234", "abc", UserType.CORPORATE);
+        userDto2 = new UserDto("name2", "12334", "abc", UserType.CORPORATE);
     }
 
     @Test
@@ -71,6 +72,23 @@ class UserServiceTest {
             Assertions.assertThrows(NotFoundUserException.class, ()->{
                 userService.withdrawUser(userId);
             });
+        });
+    }
+
+    @Test
+    @DisplayName("login Test")
+    void login_테스트(){
+        userService.join(userDto1);
+
+        Assertions.assertAll(()->{
+            Assertions.assertThrows(LoginFailException.class, ()->{
+                userService.login(new RequestLogin(userDto1.getEmail(), userDto2.getPassword()));
+            });
+            Assertions.assertThrows(NotFoundUserException.class, ()->{
+                userService.login(new RequestLogin(userDto2.getEmail(), userDto2.getPassword()));
+            });
+            UserDto loginUser = userService.login(new RequestLogin(userDto1.getEmail(), userDto1.getPassword()));
+            Assertions.assertEquals(loginUser.getName(),userDto1.getName());
         });
     }
 }

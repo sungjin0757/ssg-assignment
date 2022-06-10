@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@EnableJpaAuditing
 @Transactional
 @AutoConfigureMockMvc
 class UserApiControllerTest {
@@ -50,6 +49,9 @@ class UserApiControllerTest {
     Map<String, String> params1;
     Map<String, String> params2;
     Map<String, String> params3;
+    Map<String, String> params4;
+    Map<String, String> params5;
+    Map<String, String> params6;
     UserDto userDto1;
 
     @BeforeEach
@@ -70,7 +72,18 @@ class UserApiControllerTest {
         params3.put("name", "hong");
         params3.put("userType", "123");
 
-        userDto1 = new UserDto("name1", "1234", "abc", UserType.GENERAL);
+        userDto1 = new UserDto("sungjin@naver.com", "1234", "abc", UserType.GENERAL);
+        params4 = new HashMap<>();
+        params4.put("email","sungjin@naver.com");
+        params4.put("password","1234");
+
+        params5 = new HashMap<>();
+        params5.put("email","sungjin@naver.com");
+        params5.put("password","124");
+
+        params6 = new HashMap<>();
+        params6.put("email","sungjn@naver.com");
+        params6.put("password","1234");
     }
 
     @Test
@@ -130,6 +143,56 @@ class UserApiControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
         Assertions.assertEquals(userRepository.findById(userId), Optional.empty());
+    }
+
+    @Test
+    @DisplayName("Controller Login Test")
+    void login_테스트() throws Exception{
+        userService.join(userDto1);
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post(UrlConstants.USER_BASE+UrlConstants.LOGIN)
+                                .content(objectMapper.writeValueAsString(params2))
+                                .contentType(new MediaType(
+                                        MediaType.APPLICATION_JSON.getType(),
+                                        MediaType.APPLICATION_JSON.getSubtype(),
+                                        Charset.forName("utf8")
+                                ))
+                )
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post(UrlConstants.USER_BASE+UrlConstants.LOGIN)
+                                .content(objectMapper.writeValueAsString(params4))
+                                .contentType(new MediaType(
+                                        MediaType.APPLICATION_JSON.getType(),
+                                        MediaType.APPLICATION_JSON.getSubtype(),
+                                        Charset.forName("utf8")
+                                ))
+                )
+                .andExpect(status().isOk())
+                .andDo(print());
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post(UrlConstants.USER_BASE+UrlConstants.LOGIN)
+                                .content(objectMapper.writeValueAsString(params5))
+                                .contentType(new MediaType(
+                                        MediaType.APPLICATION_JSON.getType(),
+                                        MediaType.APPLICATION_JSON.getSubtype(),
+                                        Charset.forName("utf8")
+                                ))
+                )
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post(UrlConstants.USER_BASE+UrlConstants.LOGIN)
+                                .content(objectMapper.writeValueAsString(params6))
+                                .contentType(new MediaType(
+                                        MediaType.APPLICATION_JSON.getType(),
+                                        MediaType.APPLICATION_JSON.getSubtype(),
+                                        Charset.forName("utf8")
+                                ))
+                )
+                .andExpect(status().isBadRequest())
+                .andDo(print());
     }
 
 }

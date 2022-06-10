@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest
 @Transactional
-@EnableJpaAuditing
 class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;

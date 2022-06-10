@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @Transactional
-@EnableJpaAuditing
 class PromotionRepositoryTest {
     @Autowired
     PromotionRepository promotionRepository;

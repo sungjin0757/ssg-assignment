@@ -3,9 +3,12 @@ package com.ssgassignment.productinfoapi.service;
 import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.dto.UserDto;
 import com.ssgassignment.productinfoapi.exception.DuplicateEmailException;
+import com.ssgassignment.productinfoapi.exception.LoginFailException;
 import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
+import com.ssgassignment.productinfoapi.vo.RequestLogin;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,13 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     @Override
     public Long join(UserDto userDto) {
         checkDuplicateUser(userDto.getEmail());
         return userRepository.save(User.newInstance(userDto.getEmail(),
-                userDto.getPassword(), userDto.getName(), userDto.getUserType())).getUserId();
+                passwordEncoder.encode(userDto.getPassword()), userDto.getName(),
+                userDto.getUserType())).getUserId();
 
     }
 
@@ -32,6 +37,25 @@ public class UserServiceImpl implements UserService{
         }catch(Exception e){
             throw new NotFoundUserException("해당 사용자는 존재하지 않습니다.");
         }
+    }
+
+    @Transactional
+    @Override
+    public UserDto login(RequestLogin requestLogin) {
+        User user = userRepository.findByEmail(requestLogin.getEmail()).orElseThrow(() -> {
+            throw new NotFoundUserException("해당 사용자는 존재하지 않습니다.");
+        });
+        if(!matchPassword(user.getPassword(), requestLogin.getPassword())){
+            throw new LoginFailException("비밀 번호가 맞지 않습니다.");
+        }
+        return new UserDto(user.getEmail(), user.getPassword(), user.getName(), user.getUserType());
+    }
+
+    private boolean matchPassword(String userPassword, String loginPassword){
+        if(passwordEncoder.matches(loginPassword, userPassword)){
+            return true;
+        }
+        return false;
     }
 
     private void checkDuplicateUser(String email){
