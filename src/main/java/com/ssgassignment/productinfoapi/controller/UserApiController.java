@@ -4,6 +4,7 @@ import com.ssgassignment.productinfoapi.constatants.UrlConstants;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserStat;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.UserDto;
+import com.ssgassignment.productinfoapi.exception.ParameterException;
 import com.ssgassignment.productinfoapi.service.UserService;
 import com.ssgassignment.productinfoapi.vo.RequestUser;
 import com.ssgassignment.productinfoapi.vo.ResponseUser;
@@ -23,7 +24,11 @@ public class UserApiController {
     private final UserService userService;
 
     @PostMapping(UrlConstants.SAVE)
-    public ResponseEntity<ResponseUser> createUser(@Valid @RequestBody RequestUser requestUser){
+    public ResponseEntity<ResponseUser> createUser(@Valid @RequestBody RequestUser requestUser,
+                                                   BindingResult result){
+        if(result.hasErrors()){
+            throw new ParameterException(result);
+        }
         Long userId = userService.join(new UserDto(requestUser.getEmail(), requestUser.getPassword(),
                 requestUser.getName(), requestUser.getUserType()));
 
