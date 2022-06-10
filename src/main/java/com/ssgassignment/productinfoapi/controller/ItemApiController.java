@@ -4,6 +4,7 @@ import com.ssgassignment.productinfoapi.constatants.UrlConstants;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.ItemDto;
 import com.ssgassignment.productinfoapi.dto.ItemWithPromotionDto;
+import com.ssgassignment.productinfoapi.exception.ParameterException;
 import com.ssgassignment.productinfoapi.service.ItemService;
 import com.ssgassignment.productinfoapi.vo.RequestItem;
 import com.ssgassignment.productinfoapi.vo.ResponseItem;
@@ -11,6 +12,7 @@ import com.ssgassignment.productinfoapi.vo.ResponseItemWithPromotion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,7 +27,11 @@ public class ItemApiController {
     private final ItemService itemService;
 
     @PostMapping(UrlConstants.SAVE)
-    public ResponseEntity<ResponseItem> createItem(@Valid @RequestBody RequestItem requestItem){
+    public ResponseEntity<ResponseItem> createItem(@Valid @RequestBody RequestItem requestItem,
+                                                   BindingResult result){
+        if(result.hasErrors()){
+            throw new ParameterException(result);
+        }
         String itemName = requestItem.getItemName();
         int itemPrice = requestItem.getItemPrice();
         UserType itemType = requestItem.getItemType();

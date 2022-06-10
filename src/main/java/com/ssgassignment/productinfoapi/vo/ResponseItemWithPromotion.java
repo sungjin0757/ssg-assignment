@@ -15,7 +15,7 @@ import java.util.PriorityQueue;
 public class ResponseItemWithPromotion {
     private Long itemId;
     private String itemName;
-    private UserType itemType;
+    private String itemType;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime itemDisplayStartDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
@@ -25,7 +25,7 @@ public class ResponseItemWithPromotion {
     public ResponseItemWithPromotion(ItemWithPromotionDto dto) {
         this.itemId = dto.getItemId();
         this.itemName = dto.getItemName();
-        this.itemType = dto.getItemType();
+        this.itemType = dto.getItemType() == UserType.GENERAL ? "일반" : "기업 회원 상품";
         this.itemDisplayStartDate = dto.getItemDisplayStartDate();
         this.itemDisplayEndDate = dto.getItemDisplayEndDate();
         PromotionItemDto p = updateOptimalPromotion(dto.getPromotionItems(), dto.getItemPrice());
