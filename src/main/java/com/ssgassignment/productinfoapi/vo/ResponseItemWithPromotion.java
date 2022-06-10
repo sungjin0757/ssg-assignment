@@ -20,6 +20,7 @@ public class ResponseItemWithPromotion {
     private LocalDateTime itemDisplayStartDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime itemDisplayEndDate;
+    private int prePromotionPrice;
     private ResponsePromotionWithPrice promotion;
 
     public ResponseItemWithPromotion(ItemWithPromotionDto dto) {
@@ -28,8 +29,9 @@ public class ResponseItemWithPromotion {
         this.itemType = dto.getItemType() == UserType.GENERAL ? "일반" : "기업 회원 상품";
         this.itemDisplayStartDate = dto.getItemDisplayStartDate();
         this.itemDisplayEndDate = dto.getItemDisplayEndDate();
+        this.prePromotionPrice = dto.getItemPrice();
         PromotionItemDto p = updateOptimalPromotion(dto.getPromotionItems(), dto.getItemPrice());
-        this.promotion = p!=null ? new ResponsePromotionWithPrice(p, dto.getItemPrice(),
+        this.promotion = p!=null ? new ResponsePromotionWithPrice(p,
                 afterPromotion(dto.getItemPrice(), p.getDiscountAccount(), p.getDiscountRate())) : null;
 
     }

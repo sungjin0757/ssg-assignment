@@ -15,16 +15,14 @@ public class ResponsePromotionWithPrice {
     private LocalDateTime promotionStartDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime promotionEndDate;
-    private int prePromotionPrice;
     private int afterPromotionPrice;
 
-    public ResponsePromotionWithPrice(PromotionItemDto dto, int itemPrice, int afterPromotionPrice) {
+    public ResponsePromotionWithPrice(PromotionItemDto dto, int afterPromotionPrice) {
         this.promotionName = dto.getPromotionName();
         this.discountAccount = dto.getDiscountAccount();
         this.discountRate = dto.getDiscountRate();
         this.promotionStartDate = dto.getPromotionStartDate();
         this.promotionEndDate = dto.getPromotionEndDate();
-        this.prePromotionPrice = itemPrice;
         this.afterPromotionPrice = afterPromotionPrice;
     }
 }
