@@ -13,14 +13,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<ParameterErrorResult> validateExceptions(MethodArgumentNotValidException ex){
-//        ParameterErrorResult error = new ParameterErrorResult("VALID_EX");
-//        error.addValidErrors(ex);
-//
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
-//    }
-
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ParameterErrorResult> notValidRequestData(HttpMessageNotReadableException ex){
         ParameterErrorResult error = new ParameterErrorResult("DATA_EX");
