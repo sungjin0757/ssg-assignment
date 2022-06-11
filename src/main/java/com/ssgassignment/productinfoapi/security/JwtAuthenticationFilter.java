@@ -1,8 +1,8 @@
 package com.ssgassignment.productinfoapi.security;
 
-import com.ssgassignment.productinfoapi.constatants.SecurityConstants;
-import com.ssgassignment.productinfoapi.controller.exception.ErrorResult;
-import com.ssgassignment.productinfoapi.exception.JwtAuthenticationException;
+import com.ssgassignment.productinfoapi.common.constatants.SecurityConstants;
+import com.ssgassignment.productinfoapi.common.exception.ErrorResult;
+import com.ssgassignment.productinfoapi.common.exception.JwtAuthenticationException;
 import com.ssgassignment.productinfoapi.security.property.JwtPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,8 +94,8 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         if(bearerToken==null ){
             bearerToken="";
         }
-        if( bearerToken.startsWith("Bearer ")){
-            return bearerToken.replace("Bearer ","");
+        if( bearerToken.startsWith(SecurityConstants.BEARER)){
+            return bearerToken.replace(SecurityConstants.BEARER,"");
         }
         return null;
     }

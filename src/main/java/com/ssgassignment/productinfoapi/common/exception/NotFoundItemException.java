@@ -1,4 +1,4 @@
-package com.ssgassignment.productinfoapi.exception;
+package com.ssgassignment.productinfoapi.common.exception;
 
 public class NotFoundItemException extends BaseException{
     public NotFoundItemException() {

@@ -1,4 +1,4 @@
-package com.ssgassignment.productinfoapi.constatants;
+package com.ssgassignment.productinfoapi.common.constatants;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,4 +8,7 @@ public abstract class SecurityConstants {
     public static final List<String> JWT_FILTER_SKIP_URL = Arrays.asList(
         "/api/users/login", "/api/users/save", "/api/locale-check"
     );
+
+    public static final String SWAGGER_KEY = "jwt-auth";
+    public static final String BEARER = "Bearer ";
 }

@@ -1,7 +1,11 @@
-package com.ssgassignment.productinfoapi.security;
+package com.ssgassignment.productinfoapi.config;
 
-import com.ssgassignment.productinfoapi.constatants.SecurityConstants;
-import com.ssgassignment.productinfoapi.constatants.UrlConstants;
+import com.ssgassignment.productinfoapi.common.constatants.SecurityConstants;
+import com.ssgassignment.productinfoapi.common.constatants.UrlConstants;
+import com.ssgassignment.productinfoapi.security.CustomAuthenticationEntryPoint;
+import com.ssgassignment.productinfoapi.security.JwtAuthenticationFilter;
+import com.ssgassignment.productinfoapi.security.JwtAuthenticationSuccessHandler;
+import com.ssgassignment.productinfoapi.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -73,6 +77,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().requestMatchers(
                 PathRequest.toStaticResources().atCommonLocations(),
                 PathRequest.toH2Console()
-        );
+        )
+                .antMatchers("/swagger-ui/**")
+                .antMatchers("/api-docs/**")
+                .antMatchers("/swagger");
     }
 }

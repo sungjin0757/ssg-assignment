@@ -1,4 +1,4 @@
-package com.ssgassignment.productinfoapi.constatants;
+package com.ssgassignment.productinfoapi.common.constatants;
 
 public abstract class UrlConstants {
     public static final String API_PREFIX = "/api";

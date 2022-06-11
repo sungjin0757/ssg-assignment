@@ -1,6 +1,6 @@
 package com.ssgassignment.productinfoapi.security;
 
-import com.ssgassignment.productinfoapi.controller.exception.ErrorResult;
+import com.ssgassignment.productinfoapi.common.exception.ErrorResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

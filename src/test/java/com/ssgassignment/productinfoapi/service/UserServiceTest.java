@@ -3,9 +3,9 @@ package com.ssgassignment.productinfoapi.service;
 import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.UserDto;
-import com.ssgassignment.productinfoapi.exception.DuplicateEmailException;
-import com.ssgassignment.productinfoapi.exception.LoginFailException;
-import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
+import com.ssgassignment.productinfoapi.common.exception.DuplicateEmailException;
+import com.ssgassignment.productinfoapi.common.exception.LoginFailException;
+import com.ssgassignment.productinfoapi.common.exception.NotFoundUserException;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
 import com.ssgassignment.productinfoapi.vo.RequestLogin;
 import org.junit.jupiter.api.Assertions;
@@ -14,12 +14,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional

@@ -1,6 +1,6 @@
-package com.ssgassignment.productinfoapi.service.staticvals;
+package com.ssgassignment.productinfoapi.service.util;
 
-import com.ssgassignment.productinfoapi.exception.NotValidTimeException;
+import com.ssgassignment.productinfoapi.common.exception.NotValidTimeException;
 
 import java.time.LocalDateTime;
 

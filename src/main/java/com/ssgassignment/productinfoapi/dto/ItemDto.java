@@ -1,9 +1,7 @@
 package com.ssgassignment.productinfoapi.dto;
 
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 

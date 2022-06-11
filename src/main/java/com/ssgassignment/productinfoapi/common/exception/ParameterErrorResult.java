@@ -1,14 +1,11 @@
-package com.ssgassignment.productinfoapi.controller.exception;
+package com.ssgassignment.productinfoapi.common.exception;
 
-import com.ssgassignment.productinfoapi.exception.ParameterException;
-import lombok.AllArgsConstructor;
+import com.ssgassignment.productinfoapi.common.exception.ParameterException;
 import lombok.Data;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 

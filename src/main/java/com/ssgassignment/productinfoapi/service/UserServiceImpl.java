@@ -2,9 +2,9 @@ package com.ssgassignment.productinfoapi.service;
 
 import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.dto.UserDto;
-import com.ssgassignment.productinfoapi.exception.DuplicateEmailException;
-import com.ssgassignment.productinfoapi.exception.LoginFailException;
-import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
+import com.ssgassignment.productinfoapi.common.exception.DuplicateEmailException;
+import com.ssgassignment.productinfoapi.common.exception.LoginFailException;
+import com.ssgassignment.productinfoapi.common.exception.NotFoundUserException;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
 import com.ssgassignment.productinfoapi.vo.RequestLogin;
 import lombok.RequiredArgsConstructor;

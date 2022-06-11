@@ -1,10 +1,8 @@
 package com.ssgassignment.productinfoapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssgassignment.productinfoapi.constatants.UrlConstants;
-import com.ssgassignment.productinfoapi.controller.exception.advice.ExceptionControllerAdvice;
-import com.ssgassignment.productinfoapi.domain.Item;
-import com.ssgassignment.productinfoapi.domain.Promotion;
+import com.ssgassignment.productinfoapi.common.constatants.UrlConstants;
+import com.ssgassignment.productinfoapi.common.exception.advice.ExceptionControllerAdvice;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.ItemDto;
 import com.ssgassignment.productinfoapi.dto.PromotionDto;
@@ -19,9 +17,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -34,7 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

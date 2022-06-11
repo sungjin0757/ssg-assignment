@@ -2,7 +2,6 @@ package com.ssgassignment.productinfoapi.repository;
 
 import com.ssgassignment.productinfoapi.domain.Item;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

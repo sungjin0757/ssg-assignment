@@ -1,9 +1,9 @@
-package com.ssgassignment.productinfoapi.controller.exception.advice;
+package com.ssgassignment.productinfoapi.common.exception.advice;
 
-import com.ssgassignment.productinfoapi.controller.exception.ErrorResult;
-import com.ssgassignment.productinfoapi.controller.exception.ParameterErrorResult;
-import com.ssgassignment.productinfoapi.exception.BaseException;
-import com.ssgassignment.productinfoapi.exception.ParameterException;
+import com.ssgassignment.productinfoapi.common.exception.ErrorResult;
+import com.ssgassignment.productinfoapi.common.exception.ParameterErrorResult;
+import com.ssgassignment.productinfoapi.common.exception.BaseException;
+import com.ssgassignment.productinfoapi.common.exception.ParameterException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

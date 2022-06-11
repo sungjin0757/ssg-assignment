@@ -1,7 +1,7 @@
 package com.ssgassignment.productinfoapi.security;
 
 
-import com.ssgassignment.productinfoapi.exception.JwtAuthenticationException;
+import com.ssgassignment.productinfoapi.common.exception.JwtAuthenticationException;
 import com.ssgassignment.productinfoapi.security.property.JwtPrincipal;
 import com.ssgassignment.productinfoapi.security.property.JwtProperty;
 import io.jsonwebtoken.*;

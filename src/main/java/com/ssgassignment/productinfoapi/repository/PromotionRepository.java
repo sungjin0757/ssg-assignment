@@ -1,7 +1,6 @@
 package com.ssgassignment.productinfoapi.repository;
 
 import com.ssgassignment.productinfoapi.domain.Promotion;
-import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

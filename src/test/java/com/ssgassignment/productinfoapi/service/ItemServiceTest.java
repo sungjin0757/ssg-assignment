@@ -1,17 +1,14 @@
 package com.ssgassignment.productinfoapi.service;
 
-import com.ssgassignment.productinfoapi.domain.Item;
 import com.ssgassignment.productinfoapi.domain.Promotion;
 import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.ItemDto;
 import com.ssgassignment.productinfoapi.dto.ItemWithPromotionDto;
-import com.ssgassignment.productinfoapi.dto.PromotionItemDto;
-import com.ssgassignment.productinfoapi.dto.UserDto;
-import com.ssgassignment.productinfoapi.exception.DisabledUserException;
-import com.ssgassignment.productinfoapi.exception.NotFoundItemException;
-import com.ssgassignment.productinfoapi.exception.NotFoundUserException;
-import com.ssgassignment.productinfoapi.exception.NotValidTimeException;
+import com.ssgassignment.productinfoapi.common.exception.DisabledUserException;
+import com.ssgassignment.productinfoapi.common.exception.NotFoundItemException;
+import com.ssgassignment.productinfoapi.common.exception.NotFoundUserException;
+import com.ssgassignment.productinfoapi.common.exception.NotValidTimeException;
 import com.ssgassignment.productinfoapi.repository.ItemRepository;
 import com.ssgassignment.productinfoapi.repository.PromotionRepository;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
@@ -21,15 +18,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional

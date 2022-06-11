@@ -1,8 +1,6 @@
 package com.ssgassignment.productinfoapi.dto;
 
-import com.ssgassignment.productinfoapi.domain.Item;
 import com.ssgassignment.productinfoapi.domain.Promotion;
-import com.ssgassignment.productinfoapi.domain.PromotionItem;
 import lombok.Data;
 
 import java.time.LocalDateTime;

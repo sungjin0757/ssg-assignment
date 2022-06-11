@@ -1,7 +1,6 @@
 package com.ssgassignment.productinfoapi.dto;
 
 import com.ssgassignment.productinfoapi.domain.Item;
-import com.ssgassignment.productinfoapi.domain.PromotionItem;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import lombok.Data;
 

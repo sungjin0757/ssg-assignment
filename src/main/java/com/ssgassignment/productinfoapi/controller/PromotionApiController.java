@@ -1,11 +1,14 @@
 package com.ssgassignment.productinfoapi.controller;
 
-import com.ssgassignment.productinfoapi.constatants.UrlConstants;
+import com.ssgassignment.productinfoapi.common.constatants.SecurityConstants;
+import com.ssgassignment.productinfoapi.common.constatants.UrlConstants;
 import com.ssgassignment.productinfoapi.dto.PromotionDto;
-import com.ssgassignment.productinfoapi.exception.ParameterException;
+import com.ssgassignment.productinfoapi.common.exception.ParameterException;
 import com.ssgassignment.productinfoapi.service.PromotionService;
 import com.ssgassignment.productinfoapi.vo.RequestPromotion;
 import com.ssgassignment.productinfoapi.vo.ResponsePromotion;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +21,11 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping(UrlConstants.PROMOTION_BASE)
 @RequiredArgsConstructor
+@SecurityRequirement(name = SecurityConstants.SWAGGER_KEY)
 public class PromotionApiController {
     private final PromotionService promotionService;
 
+    @Operation(summary = "프로모션 등록")
     @PostMapping(UrlConstants.SAVE)
     public ResponseEntity<ResponsePromotion> createPromotion(@Valid @RequestBody RequestPromotion requestPromotion,
                                                              BindingResult result){
@@ -43,6 +48,7 @@ public class PromotionApiController {
                 discountAccount, discountRate, promotionStartDate, promotionEndDate));
     }
 
+    @Operation(summary = "프로모션 삭제")
     @DeleteMapping(UrlConstants.DELETE+UrlConstants.ID)
     public ResponseEntity<String> deletePromotion(@PathVariable("id")Long id){
         promotionService.deletePromotion(id);

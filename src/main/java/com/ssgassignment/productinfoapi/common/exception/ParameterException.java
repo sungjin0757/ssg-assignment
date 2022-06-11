@@ -1,4 +1,4 @@
-package com.ssgassignment.productinfoapi.exception;
+package com.ssgassignment.productinfoapi.common.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
