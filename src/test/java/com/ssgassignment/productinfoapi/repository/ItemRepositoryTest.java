@@ -58,8 +58,8 @@ class ItemRepositoryTest {
         List<Item> ordableItems2 = itemRepository.findOrdableItems(UserType.CORPORATE);
 
         Assertions.assertAll(()->{
-           Assertions.assertEquals(ordableItems1.size(),1);
-           Assertions.assertEquals(ordableItems2.size(),2);
+           Assertions.assertEquals(ordableItems1.size(),generalItemInTime());
+           Assertions.assertEquals(ordableItems2.size(),generalItemInTime() + corporateItemInTime());
            for (Item item : ordableItems1) {
                Assertions.assertEquals(item.getItemType(), UserType.GENERAL);
                Assertions.assertNotEquals(item, saveItem1);
@@ -99,5 +99,31 @@ class ItemRepositoryTest {
                 Assertions.assertNotEquals(item, item3);
             }
         });
+    }
+
+    private boolean checkTime(LocalDateTime start, LocalDateTime end){
+        LocalDateTime now = LocalDateTime.now();
+        if(start.isAfter(now) || end.isBefore(now)){
+            return false;
+        }
+        return true;
+    }
+
+    private int generalItemInTime(){
+        int cnt = 0;
+        if(checkTime(item1.getItemDisplayStartDate(),item1.getItemDisplayEndDate())){
+            cnt++;
+        }
+        if(checkTime(item3.getItemDisplayStartDate(),item3.getItemDisplayEndDate())){
+            cnt++;
+        }
+        return cnt;
+    }
+
+    private int corporateItemInTime(){
+        if(checkTime(item2.getItemDisplayStartDate(),item2.getItemDisplayEndDate())){
+            return 1;
+        }
+        return 0;
     }
 }
