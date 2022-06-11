@@ -54,6 +54,20 @@ http://localhost:8080/swagger-ui.html
 
 **Summary**
 
+- **init(초기 설정 값)**
+  - 이수경 
+    - Id : lee@naver.com
+    - Pw : 123
+  - 최상면
+    - Id : choi@naver.com
+    - Pw : 123
+  - 강재석
+    - Id : kang@naver.com
+    - Pw : 123
+  - 김구현
+    - Id : kim@naver.com
+    - Pw : 123
+
 - **Domain**
   1. `Item` 과 `Promotion`의 N:N 관계를  `PromotionItem` 을 추가하여 1:N, 1:N 관계로 풀어냈습니다.
   2. 준영속 상태를 고려하여 `equals()` 와 `hashcode()`를 재정의 하였습니다.
