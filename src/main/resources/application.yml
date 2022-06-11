@@ -13,11 +13,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true
     properties:
       hibernate:
         default_batch_fetch_size: 1000
-        format_sql: true
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
