@@ -34,7 +34,7 @@ class ItemRepositoryTest {
                 LocalDateTime.of(2022, 8, 3,0,0));
         item3 = Item.newInstance("name3",100, UserType.GENERAL,
                 LocalDateTime.of(2022, 6, 3,0,0),
-                LocalDateTime.of(2022, 6, 15,0,0));
+                LocalDateTime.of(2022, 8, 15,0,0));
     }
 
     @Test

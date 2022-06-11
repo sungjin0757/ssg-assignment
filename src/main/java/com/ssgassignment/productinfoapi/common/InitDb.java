@@ -10,6 +10,7 @@ import com.ssgassignment.productinfoapi.service.ItemService;
 import com.ssgassignment.productinfoapi.service.PromotionService;
 import com.ssgassignment.productinfoapi.service.UserService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
-public class initDb {
+public class InitDb {
 
     private final UserService userService;
     private final ItemService itemService;

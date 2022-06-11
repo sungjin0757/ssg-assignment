@@ -83,8 +83,7 @@ class ItemServiceTest {
                 itemService.orderAbleItems(user3.getUserId());
             });
             Assertions.assertThrows(NotFoundUserException.class, ()->{
-                itemService.orderAbleItems(Math.max(user1.getUserId(),
-                        Math.max(user2.getUserId(),user3.getUserId()))+1);
+                itemService.orderAbleItems(-99l);
             });
         });
     }
@@ -101,9 +100,9 @@ class ItemServiceTest {
         Long itemId3 = itemService.saveItem(itemDto3);
 
         Assertions.assertAll(()->{
-            Assertions.assertEquals(itemRepository.findById(itemId1).get().getPromotionItems().size(),3);
-            Assertions.assertEquals(itemRepository.findById(itemId2).get().getPromotionItems().size(),2);
-            Assertions.assertEquals(itemRepository.findById(itemId3).get().getPromotionItems().size(),2);
+            Assertions.assertEquals(itemRepository.findById(itemId1).get().getPromotionItems().size(),5);
+            Assertions.assertEquals(itemRepository.findById(itemId2).get().getPromotionItems().size(),3);
+            Assertions.assertEquals(itemRepository.findById(itemId3).get().getPromotionItems().size(),4);
             Assertions.assertThrows(NotValidTimeException.class, ()->{
                 itemService.saveItem(itemDto4);
             });
@@ -129,10 +128,10 @@ class ItemServiceTest {
                 itemService.findItemWithPromotions(itemId2);
             });
             Assertions.assertThrows(NotFoundItemException.class,()->{
-               itemService.findItemWithPromotions(Math.max(itemId1, Math.max(itemId2, itemId3))+1) ;
+               itemService.findItemWithPromotions(-99l) ;
             });
-            Assertions.assertEquals(findItem1.getPromotionItems().size(),2);
-            Assertions.assertEquals(findItem3.getPromotionItems().size(),2);
+            Assertions.assertEquals(findItem1.getPromotionItems().size(),4);
+            Assertions.assertEquals(findItem3.getPromotionItems().size(),4);
         });
     }
 
@@ -140,7 +139,7 @@ class ItemServiceTest {
     @DisplayName("DeleteItem Test")
     void deleteItem_테스트(){
         Assertions.assertThrows(NotFoundItemException.class, ()->{
-           itemService.deleteItem(0l);
+           itemService.deleteItem(-99l);
         });
 
         Long itemId = itemService.saveItem(itemDto1);

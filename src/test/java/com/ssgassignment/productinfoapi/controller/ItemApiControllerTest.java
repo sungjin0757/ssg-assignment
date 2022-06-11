@@ -3,7 +3,6 @@ package com.ssgassignment.productinfoapi.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssgassignment.productinfoapi.common.constatants.UrlConstants;
 import com.ssgassignment.productinfoapi.common.exception.advice.ExceptionControllerAdvice;
-import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.ItemDto;
 import com.ssgassignment.productinfoapi.dto.PromotionDto;
 import com.ssgassignment.productinfoapi.dto.UserDto;
@@ -184,7 +183,7 @@ class ItemApiControllerTest {
                 .andDo(print());
         mockMvc.perform(
                         MockMvcRequestBuilders.get(
-                                UrlConstants.ITEM_BASE+UrlConstants.USER+"/"+Math.max(userId1,userId2)+1)
+                                UrlConstants.ITEM_BASE+UrlConstants.USER+"/-99")
                                 .contentType(new MediaType(
                                         MediaType.APPLICATION_JSON.getType(),
                                         MediaType.APPLICATION_JSON.getSubtype(),

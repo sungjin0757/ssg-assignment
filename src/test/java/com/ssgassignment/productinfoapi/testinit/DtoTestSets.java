@@ -19,7 +19,7 @@ public abstract class DtoTestSets {
             LocalDateTime.of(2022, 2, 5,0,0));
     public static final ItemDto ITEM_DTO3 = new ItemDto("name3",100, UserType.GENERAL,
             LocalDateTime.of(2022, 3, 4,0,0),
-            LocalDateTime.of(2022, 6, 16,0,0));
+            LocalDateTime.of(2022, 8, 16,0,0));
     public static final ItemDto ITEM_DTO4 = new ItemDto("name3",100, UserType.GENERAL,
             LocalDateTime.of(2022, 3, 4,0,0),
             LocalDateTime.of(2021, 6, 16,0,0));
@@ -44,7 +44,7 @@ public abstract class DtoTestSets {
     public static final PromotionDto PROMOTION_DTO3 = new PromotionDto(
             "nam3", 1000, 0.1,
             LocalDateTime.of(2022, 6, 3,0,0),
-            LocalDateTime.of(2022, 6, 15,0,0));
+            LocalDateTime.of(2022, 8, 15,0,0));
 
     /**
      * user
