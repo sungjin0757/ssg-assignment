@@ -12,11 +12,15 @@ import java.util.Objects;
 @Entity
 @Getter
 @Table(name= "users")
+@SequenceGenerator(
+        name = "USER_SEQ_GENERATOR",
+        sequenceName = "USER_SEQ",
+        initialValue = 1, allocationSize = 20)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends AbstractDataTraceEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_SEQ_GENERATOR")
     @Column(name = "user_id")
     private Long userId;
 

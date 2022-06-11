@@ -9,10 +9,14 @@ import java.util.Objects;
 
 @Entity
 @Getter
+@SequenceGenerator(
+        name = "PROMOTION_ITEM_SEQ_GENERATOR",
+        sequenceName = "PROMOTION_ITEM_SEQ",
+        initialValue = 1, allocationSize = 20)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PromotionItem extends AbstractDataTraceEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROMOTION_ITEM_SEQ_GENERATOR")
     @Column(name = "promotion_item_id")
     private Long promotionItemId;
 

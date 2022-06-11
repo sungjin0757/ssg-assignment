@@ -1,5 +1,6 @@
 package com.ssgassignment.productinfoapi.common;
 
+import com.ssgassignment.productinfoapi.domain.User;
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.ItemDto;
 import com.ssgassignment.productinfoapi.dto.PromotionDto;
@@ -30,7 +31,9 @@ public class initDb {
         userService.join(new UserDto("kang@naver.com", "123", "강재석", UserType.GENERAL));
         userService.join(new UserDto("kim@naver.com", "123", "김구현", UserType.GENERAL));
 
-        userRepository.findById(userId).get().userWithDrawl();
+        User findUser = userRepository.findById(userId).get();
+        findUser.userWithDrawl();
+        userRepository.save(findUser);
 
         itemService.saveItem(new ItemDto("노브랜드 버터링",20000, UserType.GENERAL, LocalDateTime.of(2022,1,1,0,0,0),
                 LocalDateTime.of(2023,1,1,23,59,59)));

@@ -13,10 +13,14 @@ import java.util.Objects;
 
 @Getter
 @Entity
+@SequenceGenerator(
+        name = "ITEM_SEQ_GENERATOR",
+        sequenceName = "ITEM_SEQ",
+        initialValue = 1, allocationSize = 20)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends AbstractDataTraceEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_SEQ_GENERATOR")
     @Column(name = "item_id")
     private Long itemId;
 
