@@ -12,6 +12,7 @@ import com.ssgassignment.productinfoapi.common.exception.NotValidTimeException;
 import com.ssgassignment.productinfoapi.repository.ItemRepository;
 import com.ssgassignment.productinfoapi.repository.PromotionRepository;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
+import com.ssgassignment.productinfoapi.testinit.DtoTestSets;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -63,18 +64,10 @@ class ItemServiceTest {
                 "nam3", 1000, 0.1,
                 LocalDateTime.of(2022, 6, 3,0,0),
                 LocalDateTime.of(2022, 6, 15,0,0));
-        itemDto1 = new ItemDto("name1",100, UserType.GENERAL,
-                LocalDateTime.of(2022, 2, 1,0,0),
-                LocalDateTime.of(2023, 3, 3,0,0));
-        itemDto2 = new ItemDto("name2",100, UserType.CORPORATE,
-                LocalDateTime.of(2022, 2, 4,0,0),
-                LocalDateTime.of(2022, 2, 5,0,0));
-        itemDto3 = new ItemDto("name3",100, UserType.GENERAL,
-                LocalDateTime.of(2022, 3, 4,0,0),
-                LocalDateTime.of(2022, 6, 16,0,0));
-        itemDto4 = new ItemDto("name3",100, UserType.GENERAL,
-                LocalDateTime.of(2022, 3, 4,0,0),
-                LocalDateTime.of(2021, 6, 16,0,0));
+        itemDto1 = DtoTestSets.ITEM_DTO1;
+        itemDto2 = DtoTestSets.ITEM_DTO2;
+        itemDto3 = DtoTestSets.ITEM_DTO3;
+        itemDto4 = DtoTestSets.ITEM_DTO4;
     }
 
     @Test

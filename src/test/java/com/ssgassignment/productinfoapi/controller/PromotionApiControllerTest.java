@@ -6,6 +6,7 @@ import com.ssgassignment.productinfoapi.common.exception.advice.ExceptionControl
 import com.ssgassignment.productinfoapi.dto.PromotionDto;
 import com.ssgassignment.productinfoapi.repository.PromotionRepository;
 import com.ssgassignment.productinfoapi.service.PromotionService;
+import com.ssgassignment.productinfoapi.testinit.DtoTestSets;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.Charset;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -61,10 +61,7 @@ class PromotionApiControllerTest {
 
         params2 = new HashMap<>();
 
-        promotionDto1 = new PromotionDto(
-                "name1", 1000, 0.1,
-                LocalDateTime.of(2022, 2, 3,0,0),
-                LocalDateTime.of(2022, 3, 3,0,0));
+        promotionDto1 = DtoTestSets.PROMOTION_DTO1;
     }
 
     @Test

@@ -1,12 +1,12 @@
 package com.ssgassignment.productinfoapi.service;
 
 import com.ssgassignment.productinfoapi.domain.User;
-import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.UserDto;
 import com.ssgassignment.productinfoapi.common.exception.DuplicateEmailException;
 import com.ssgassignment.productinfoapi.common.exception.LoginFailException;
 import com.ssgassignment.productinfoapi.common.exception.NotFoundUserException;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
+import com.ssgassignment.productinfoapi.testinit.DtoTestSets;
 import com.ssgassignment.productinfoapi.vo.RequestLogin;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,8 +31,8 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp(){
-        userDto1 = new UserDto("name1", "1234", "abc", UserType.GENERAL);
-        userDto2 = new UserDto("name2", "12334", "abc", UserType.CORPORATE);
+        userDto1 = DtoTestSets.USER_DTO1;
+        userDto2 = DtoTestSets.USER_DTO2;
     }
 
     @Test

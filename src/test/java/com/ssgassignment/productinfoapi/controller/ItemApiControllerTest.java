@@ -11,6 +11,7 @@ import com.ssgassignment.productinfoapi.repository.ItemRepository;
 import com.ssgassignment.productinfoapi.service.ItemService;
 import com.ssgassignment.productinfoapi.service.PromotionService;
 import com.ssgassignment.productinfoapi.service.UserService;
+import com.ssgassignment.productinfoapi.testinit.DtoTestSets;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +26,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.Charset;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -93,34 +93,20 @@ class ItemApiControllerTest {
         params3.put("itemType", "CORPORATE");
         params3.put("itemDisplayEndDate", "2018-12-15T10:00:00");
         params3.put("itemDisplayStartDate", "2019-12-15T10:00:00");
-        promotionDto1 = new PromotionDto(
-                "name1", 1000, 0.1,
-                LocalDateTime.of(2022, 2, 3,0,0),
-                LocalDateTime.of(2022, 3, 3,0,0));
-        promotionDto2 = new PromotionDto(
-                "name2", 3000, 0.1,
-                LocalDateTime.of(2022, 2, 3,0,0),
-                LocalDateTime.of(2022, 8, 3,0,0));
-        promotionDto3 = new PromotionDto(
-                "nam3", 1000, 0.2,
-                LocalDateTime.of(2022, 6, 3,0,0),
-                LocalDateTime.of(2022, 6, 15,0,0));
+        promotionDto1 = DtoTestSets.PROMOTION_DTO1;
+        promotionDto2 = DtoTestSets.PROMOTION_DTO2;
+        promotionDto3 = DtoTestSets.PROMOTION_DTO3;
 
-        itemDto1 = new ItemDto("name1",10000, UserType.GENERAL,
-                LocalDateTime.of(2022, 2, 1,0,0),
-                LocalDateTime.of(2022, 3, 3,0,0));
-        itemDto2 = new ItemDto("name2",10000, UserType.CORPORATE,
-                LocalDateTime.of(2022, 2, 4,0,0),
-                LocalDateTime.of(2022, 8, 5,0,0));
-        itemDto3 = new ItemDto("name3",20000, UserType.GENERAL,
-                LocalDateTime.of(2022, 3, 4,0,0),
-                LocalDateTime.of(2022, 6, 16,0,0));
-        itemDto4 = new ItemDto("name3",100, UserType.GENERAL,
-                LocalDateTime.of(2022, 3, 4,0,0),
-                LocalDateTime.of(2021, 6, 16,0,0));
-        userDto1 = new UserDto("name1", "1234", "abc", UserType.GENERAL);
-        userDto2 = new UserDto("name2", "1234", "abc", UserType.CORPORATE);
+        itemDto1 = DtoTestSets.ITEM_DTO6;
+        itemDto2 = DtoTestSets.ITEM_DTO5;
+        itemDto3 = DtoTestSets.ITEM_DTO3;
+        itemDto4 = DtoTestSets.ITEM_DTO4;
+        userDto1 = DtoTestSets.USER_DTO1;
+        userDto2 = DtoTestSets.USER_DTO2;
 
+    }
+
+    private void initDb(){
         itemId1 = itemService.saveItem(itemDto1);
         itemId2 = itemService.saveItem(itemDto2);
         itemId3 = itemService.saveItem(itemDto3);
@@ -175,6 +161,7 @@ class ItemApiControllerTest {
     @Test
     @DisplayName("itemInfos Test")
     void itemInfos_테스트() throws Exception{
+        initDb();
         mockMvc.perform(
                         MockMvcRequestBuilders.get(UrlConstants.ITEM_BASE+UrlConstants.USER+"/"+userId1)
                                 .contentType(new MediaType(
@@ -211,6 +198,7 @@ class ItemApiControllerTest {
     @Test
     @DisplayName("itemWithPromotionInfos Test")
     void itemWithPromotionInfos_테스트() throws Exception{
+        initDb();
         mockMvc.perform(
                         MockMvcRequestBuilders.get(UrlConstants.ITEM_BASE+UrlConstants.PROMOTION+"/"+itemId1)
                                 .contentType(new MediaType(
@@ -256,6 +244,7 @@ class ItemApiControllerTest {
     @Test
     @DisplayName("deleteItem Test")
     void deleteItem_테스트() throws Exception{
+        itemId1 = itemService.saveItem(itemDto1);
         mockMvc.perform(
                         MockMvcRequestBuilders.delete(UrlConstants.ITEM_BASE+UrlConstants.DELETE+"/"+itemId1)
                                 .contentType(new MediaType(

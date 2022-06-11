@@ -7,13 +7,13 @@ import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.PromotionDto;
 import com.ssgassignment.productinfoapi.repository.ItemRepository;
 import com.ssgassignment.productinfoapi.repository.PromotionRepository;
+import com.ssgassignment.productinfoapi.testinit.DtoTestSets;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -37,18 +37,9 @@ class PromotionServiceTest {
 
     @BeforeEach
     void setUp(){
-        promotionDto1 = new PromotionDto(
-                "name1", 1000, 0.1,
-                LocalDateTime.of(2022, 2, 3,0,0),
-                LocalDateTime.of(2022, 3, 3,0,0));
-        promotionDto2 = new PromotionDto(
-                "name2", 1000, 0.1,
-                LocalDateTime.of(2022, 2, 3,0,0),
-                LocalDateTime.of(2022, 8, 3,0,0));
-        promotionDto3 = new PromotionDto(
-                "nam3", 1000, 0.1,
-                LocalDateTime.of(2022, 6, 3,0,0),
-                LocalDateTime.of(2022, 6, 15,0,0));
+        promotionDto1 = DtoTestSets.PROMOTION_DTO1;
+        promotionDto2 = DtoTestSets.PROMOTION_DTO2;
+        promotionDto3 = DtoTestSets.PROMOTION_DTO3;
         item1 = Item.newInstance("name1",100, UserType.GENERAL,
                 LocalDateTime.of(2022, 2, 1,0,0),
                 LocalDateTime.of(2023, 3, 3,0,0));

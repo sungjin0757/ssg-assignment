@@ -7,6 +7,7 @@ import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
 import com.ssgassignment.productinfoapi.dto.UserDto;
 import com.ssgassignment.productinfoapi.repository.UserRepository;
 import com.ssgassignment.productinfoapi.service.UserService;
+import com.ssgassignment.productinfoapi.testinit.DtoTestSets;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -69,7 +70,7 @@ class UserApiControllerTest {
         params3.put("name", "hong");
         params3.put("userType", "123");
 
-        userDto1 = new UserDto("sungjin@naver.com", "1234", "abc", UserType.GENERAL);
+        userDto1 = DtoTestSets.USER_DTO3;
         params4 = new HashMap<>();
         params4.put("email","sungjin@naver.com");
         params4.put("password","1234");
