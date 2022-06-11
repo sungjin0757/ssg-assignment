@@ -1,6 +1,7 @@
 package com.ssgassignment.productinfoapi.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,7 +15,9 @@ public class RequestPromotion {
     private Integer discountAccount;
     private Double discountRate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+    @Schema(example = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime promotionStartDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+    @Schema(example = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime promotionEndDate;
 }

@@ -1,13 +1,11 @@
 package com.ssgassignment.productinfoapi.vo;
 
 import com.ssgassignment.productinfoapi.domain.enumeration.UserType;
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
@@ -21,5 +19,6 @@ public class RequestUser {
     @NotNull(message = "Name Cannot Be Null")
     private String name;
     @NotNull(message = "UserType Cannot Be Null")
+    @Schema(example = "Press CORPORATE Or GENERAL")
     private UserType userType;
 }
